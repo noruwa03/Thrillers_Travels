@@ -2,13 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
 const NavBar = () => {
   const currentRoute = usePathname();
 
   return (
     <>
       {" "}
-      <div className="bg-white rounded-tr-2xl h-full rounded-br-2xl">
+      <div className="bg-white lg:rounded-tr-2xl lg:rounded-br-2xl h-full">
         <nav className="h-full flex flex-col justify-between w-4/5 mx-auto">
           <div>
             <h1 className="mt-6 text-xl font-bold text-center break-words">
@@ -79,8 +80,8 @@ const NavBar = () => {
                 <span
                   className={
                     currentRoute === `/`
-                      ? "text-black font-medium text-sm"
-                      : "text-gray-700 text-sm"
+                      ? "text-black font-semibold text-[0.8em]"
+                      : "text-gray-700 text-[0.8em]"
                   }
                 >
                   Dashboard
@@ -122,8 +123,8 @@ const NavBar = () => {
                 <span
                   className={
                     currentRoute === `/explore-city`
-                      ? "text-black font-medium text-sm"
-                      : "text-gray-700 text-sm"
+                      ? "text-black font-semibold text-[0.8em]"
+                      : "text-gray-700 text-[0.8em]"
                   }
                 >
                   Explore City
@@ -163,8 +164,8 @@ const NavBar = () => {
                 <span
                   className={
                     currentRoute === `/tickets`
-                      ? "text-black font-medium text-sm"
-                      : "text-gray-700 text-sm"
+                      ? "text-black font-semibold text-[0.8em]"
+                      : "text-gray-700 text-[0.8em]"
                   }
                 >
                   Tickets
@@ -203,8 +204,8 @@ const NavBar = () => {
                 <span
                   className={
                     currentRoute === `/favorites`
-                      ? "text-black font-medium text-sm"
-                      : "text-gray-700 text-sm"
+                      ? "text-black font-semibold text-[0.8em]"
+                      : "text-gray-700 text-[0.8em]"
                   }
                 >
                   Favorites
@@ -244,8 +245,8 @@ const NavBar = () => {
                 <span
                   className={
                     currentRoute === `/settings`
-                      ? "text-black font-medium text-sm"
-                      : "text-gray-700 text-sm"
+                      ? "text-black font-semibold text-[0.8em]"
+                      : "text-gray-700 text-[0.8em]"
                   }
                 >
                   Settings
@@ -275,9 +276,8 @@ const NavBar = () => {
               </svg>
             </div>
 
-            <span className="text-[#848484] text-sm">Logout</span>
+            <span className="text-[#848484] text-[0.8em]">Logout</span>
           </button>
-       
         </nav>
       </div>
     </>
@@ -285,3 +285,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

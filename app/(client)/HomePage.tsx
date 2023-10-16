@@ -6,14 +6,10 @@ import NavBar from "../components/NavBar/NavBar";
 
 const HomePage = () => {
   const date = Date.now();
+  const sideNav = useRef<HTMLDivElement>(null);
 
-  const menu = useRef<HTMLDivElement>(null);
-  const navItem = useRef<HTMLDivElement>(null);
-  
-
-  const menuHandler = () => {
-    menu.current?.classList.toggle("hamburger-toggle");
-    navItem.current?.classList.toggle("hidden");
+  const sideNavHandler = () => {
+    sideNav.current?.classList.toggle("hidden");
   };
 
   const dropdown = useRef<HTMLUListElement | null>(null);
@@ -21,21 +17,21 @@ const HomePage = () => {
     dropdown.current?.classList.toggle("hidden");
   };
 
-  const [room, setRoom] = useState(1);
-  const [adult, setAdult] = useState(2);
-  const [children, setChildren] = useState(0);
+  // const [room, setRoom] = useState(1);
+  const [adult, setAdult] = useState(3);
+  // const [children, setChildren] = useState(0);
 
-  const increaseRoom = () => {
-    if (room < 10) {
-      setRoom(room + 1);
-    }
-  };
+  // const increaseRoom = () => {
+  //   if (room < 10) {
+  //     setRoom(room + 1);
+  //   }
+  // };
 
-  const decreaseRoom = () => {
-    if (room > 1) {
-      setRoom(room - 1);
-    }
-  };
+  // const decreaseRoom = () => {
+  //   if (room > 1) {
+  //     setRoom(room - 1);
+  //   }
+  // };
 
   const increaseAdult = () => {
     if (adult < 10) {
@@ -49,17 +45,17 @@ const HomePage = () => {
     }
   };
 
-  const increaseChildren = () => {
-    if (children < 10) {
-      setChildren(children + 1);
-    }
-  };
+  // const increaseChildren = () => {
+  //   if (children < 10) {
+  //     setChildren(children + 1);
+  //   }
+  // };
 
-  const decreaseChildren = () => {
-    if (children > 1) {
-      setChildren(children - 1);
-    }
-  };
+  // const decreaseChildren = () => {
+  //   if (children > 1) {
+  //     setChildren(children - 1);
+  //   }
+  // };
 
   const galleryRef = createRef<HTMLDivElement>();
   const fooRef = createRef<HTMLDivElement>();
@@ -71,35 +67,45 @@ const HomePage = () => {
 
   const next = () => {
     const divClientWidth = fooRef.current?.clientWidth;
-
     galleryRef.current?.scrollBy(divClientWidth!, 0);
   };
+
+  const [nameTypeFocused, setNameTypeFocused] = useState("text");
 
   return (
     <>
       <main className="flex flex-row items-start justify-start bg-gray-100">
-        <div className="lg:sticky lg:top-0 lg:block hidden lg:w-[15%] fixed w-full z-30 h-screen">
+        <div
+          ref={sideNav}
+          className="lg:sticky lg:top-0 lg:block hidden lg:w-[15%] fixed w-full z-30 h-screen"
+        >
           <NavBar />
         </div>
-        <div ref={menu} className="lg:hidden block">
-          <div
-            onClick={menuHandler}
-            className="fixed top-7 right-6 w-8 h-[2px] bg-black rounded-full before:w-8 before:h-[2px] before:bg-black before:rounded-full before:content-[''] before:absolute before:-translate-y-2 before:transition-all before:duration-150 after:w-8 after:h-[2px] after:bg-black after:rounded-full after:content-[''] after:absolute after:translate-y-2 after:transition-all after:duration-150 z-40"
-          ></div>
+        <div onClick={sideNavHandler} className={`lg:hidden block`}>
+          <div className="w-10 h-14 rounded-tl-md rounded-bl-md bg-red-100/70 fixed top-[50%] right-0 -translate-y-[50%] grid place-content-center z-40">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="bi bi-arrow-left-square fill-purple-500"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+              />
+            </svg>
+          </div>
         </div>
-        <div ref={menu} className="lg:hidden block">
-          <div
-            onClick={menuHandler}
-            className="fixed top-7 right-6 w-8 h-[2px] bg-black rounded-full before:w-8 before:h-[2px] before:bg-black before:rounded-full before:content-[''] before:absolute before:-translate-y-2 before:transition-all before:duration-150 after:w-8 after:h-[2px] after:bg-black after:rounded-full after:content-[''] after:absolute after:translate-y-2 after:transition-all after:duration-150 z-40"
-          ></div>
-        </div>
+
         <div className="lg:w-[85%] w-full lg:px-8 px-4">
           <div className="lg:mt-0 mt-4 bg-white shadow-[0_0px_4px_-1.76px_rgba(0,0,0,0.3)] rounded-3xl lg:px-8 px-5 py-3 flex lg:flex-row  flex-col-reverse items-center justify-between">
             <div className="relative w-full">
               <input
                 type="search"
                 id="Search"
-                className="block lg:w-60 w-full my-1 outline-none border-[1px] border-gray-300 focus:border-purple-900 pl-10 pr-4 xl:py-[0.3rem] py-2 rounded-lg placeholder:text-[#C4C4C4] placeholder:font-normal placeholder:text-sm lg:text-base text-sm"
+                className="block lg:w-60 w-full my-1 outline-none border-[1px] border-gray-300 focus:border-purple-900 pl-10 pr-4 xl:py-[0.5rem] py-2 rounded-lg placeholder:text-[#C4C4C4] placeholder:font-normal placeholder:text-sm text-sm"
                 placeholder="Search anything ..."
               />
 
@@ -121,7 +127,7 @@ const HomePage = () => {
               </button>
             </div>
             <div className="lg:w-96 w-full lg:mb-0 mb-2 flex flex-row items-center lg:justify-end justify-center gap-8">
-              <div className="font-medium text-sm">
+              <div className="font-semibold text-sm">
                 {new Date(date).toDateString()}
               </div>
               <div className="relative grid place-content-center bg-white shadow-[0_0px_4px_-1.76px_rgba(0,0,0,0.3)] p-2 rounded-xl">
@@ -155,7 +161,7 @@ const HomePage = () => {
                 height={50}
                 className="w-full h-full object-cover rounded-2xl"
               />
-              <div className="lg:hidden block lg:w-3/5 w-4/5 absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] lg:p-8 p-3 backdrop-blur-xl bg-white/30 rounded-lg text-white">
+              <div className="lg:hidden block lg:w-3/5 w-4/5 absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] lg:p-8 p-3 backdrop-blur-xl bg-white/30 rounded-lg text-slate-800">
                 <h2 className="text-center text-lg font-semibold mb-4">
                   Amazing Destinations With MimaBooking
                 </h2>
@@ -164,15 +170,15 @@ const HomePage = () => {
                 </p>
               </div>
               <div className="lg:w-[85%] sm:w-[94%] w-[85%] absolute sm:-bottom-8 -bottom-16 left-[50%] -translate-x-[50%] p-3 bg-white shadow-[0_0px_4px_-1.76px_rgba(0,0,0,0.3)] rounded-2xl hidden lg:flex sm:flex-row flex-col items-center justify-between">
-                <div className="relative">
+                <div className="relative w-[30%]">
                   <input
                     type="text"
                     id="Location"
-                    className="block my-1 outline-none border-none pl-10 pr-4 xl:py-[0.3rem] py-2 rounded-lg placeholder:text-[#C4C4C4] placeholder:font-normal placeholder:text-sm lg:text-base text-sm"
+                    className="block w-full my-1 outline-none border-none pl-10 pr-4 xl:py-[0.3rem] py-2 rounded-lg placeholder:text-[#C4C4C4] placeholder:font-normal placeholder:text-sm text-sm"
                     placeholder="Where are you going?"
                   />
 
-                  <button className="absolute inset-y-0 left-0 flex items-center px-4 z-20">
+                  <button className="absolute inset-y-0 left-0 flex items-center px-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -185,17 +191,35 @@ const HomePage = () => {
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
                   </button>
+                  <button className="absolute inset-y-0 -right-4 flex items-center px-4">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      className="bi bi-chevron-down"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                      />
+                    </svg>
+                  </button>
                 </div>
                 <div className="lg:block hidden h-8 w-[1px] bg-gray-300"></div>
-                <div className="relative">
+                <div className="relative w-[30%]">
                   <input
-                    type="date"
+                    type={nameTypeFocused}
                     id="Date"
+                    onFocus={() => setNameTypeFocused("date")}
+                    onBlur={() => setNameTypeFocused("text")}
                     placeholder="Check-in Date"
-                    className="block my-1 outline-none border-none pl-10 pr-4 xl:py-[0.3rem] py-2 lg:text-base text-sm text-gray-600"
+                    className="block w-full my-1 outline-none border-none pl-10 pr-4 xl:py-[0.3rem] py-2 text-sm text-[#C4C4C4] placeholder:text-sm cursor-pointer"
                   />
 
-                  <button className="absolute inset-y-0 left-0 flex items-center px-4 z-20">
+                  <button className="absolute inset-y-0 left-0 flex items-center px-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -209,24 +233,46 @@ const HomePage = () => {
                       <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z" />
                     </svg>
                   </button>
+                  <button className="absolute inset-y-0 -right-4 flex items-center px-4">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="currentColor"
+                      className="bi bi-chevron-down"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                      />
+                    </svg>
+                  </button>
                 </div>
                 <div className="lg:block hidden h-8 w-[1px] bg-gray-300"></div>
-                <div className="flex flex-row items-center justify-start gap-4 relative">
-                  <svg
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div className="w-[17%] flex flex-row items-center justify-between gap-4 relative">
+                  <div
+                    onClick={toggleDropdown}
+                    className="flex flex-row items-center justify-start gap-3"
                   >
-                    <path
-                      d="M10.0007 5.50001C10.9173 5.50001 11.6673 6.25001 11.6673 7.16668C11.6673 8.08334 10.9173 8.83334 10.0007 8.83334C9.08398 8.83334 8.33398 8.08334 8.33398 7.16668C8.33398 6.25001 9.08398 5.50001 10.0007 5.50001ZM10.0007 13.8333C12.2507 13.8333 14.834 14.9083 15.0007 15.5H5.00065C5.19232 14.9 7.75898 13.8333 10.0007 13.8333ZM10.0007 3.83334C8.15898 3.83334 6.66732 5.32501 6.66732 7.16668C6.66732 9.00834 8.15898 10.5 10.0007 10.5C11.8423 10.5 13.334 9.00834 13.334 7.16668C13.334 5.32501 11.8423 3.83334 10.0007 3.83334ZM10.0007 12.1667C7.77565 12.1667 3.33398 13.2833 3.33398 15.5V17.1667H16.6673V15.5C16.6673 13.2833 12.2257 12.1667 10.0007 12.1667Z"
-                      fill="#000"
-                    />
-                  </svg>
+                    <svg
+                      width="20"
+                      height="21"
+                      viewBox="0 0 20 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10.0007 5.50001C10.9173 5.50001 11.6673 6.25001 11.6673 7.16668C11.6673 8.08334 10.9173 8.83334 10.0007 8.83334C9.08398 8.83334 8.33398 8.08334 8.33398 7.16668C8.33398 6.25001 9.08398 5.50001 10.0007 5.50001ZM10.0007 13.8333C12.2507 13.8333 14.834 14.9083 15.0007 15.5H5.00065C5.19232 14.9 7.75898 13.8333 10.0007 13.8333ZM10.0007 3.83334C8.15898 3.83334 6.66732 5.32501 6.66732 7.16668C6.66732 9.00834 8.15898 10.5 10.0007 10.5C11.8423 10.5 13.334 9.00834 13.334 7.16668C13.334 5.32501 11.8423 3.83334 10.0007 3.83334ZM10.0007 12.1667C7.77565 12.1667 3.33398 13.2833 3.33398 15.5V17.1667H16.6673V15.5C16.6673 13.2833 12.2257 12.1667 10.0007 12.1667Z"
+                        fill="#000"
+                      />
+                    </svg>
 
-                  <div className="font-semibold text-sm">
-                    {room} room, {adult} adults, {children} children
+                    <div className="font-semibold text-sm">
+                      {/* {room} room, {adult} adults, {children} children */}
+                      {adult} adults
+                    </div>
                   </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -245,9 +291,9 @@ const HomePage = () => {
 
                   <ul
                     ref={dropdown}
-                    className="hidden absolute top-8 lg:right-0 -right-28 bg-white shadow-[0_0px_4px_-1.76px_rgba(0,0,0,0.3)] w-48 px-4 rounded-md before:absolute lg:before:left-[92%] lg:before:-translate-x-[10%] before:left-[10%]  before:-translate-x-[10%] before:-translate-y-2 before:content-[''] before:bg-gray-100 before:h-4 before:w-4 before:-rotate-45 text-sm flex-col"
+                    className="hidden absolute top-8 lg:right-0 -right-28 bg-white shadow-[0_0px_4px_-1.76px_rgba(0,0,0,0.3)] w-48 px-4 rounded-md before:absolute lg:before:left-[92%] lg:before:-translate-x-[10%] before:left-[10%]  before:-translate-x-[10%] before:-translate-y-2 before:content-[''] before:bg-gray-50 before:h-4 before:w-4 before:-rotate-45 text-sm flex-col"
                   >
-                    <li className="mt-3">
+                    {/* <li className="mt-3">
                       <div className="py-2 flex flex-row items-center justify-between">
                         <span>Rooms</span>
                         <div className="flex flex-row items-center space-x-3">
@@ -292,7 +338,7 @@ const HomePage = () => {
                           </button>
                         </div>
                       </div>
-                    </li>
+                    </li> */}
 
                     <li className="my-1">
                       <div className="py-2 flex flex-row items-center justify-between">
@@ -341,7 +387,7 @@ const HomePage = () => {
                       </div>
                     </li>
 
-                    <li className="mb-3">
+                    {/* <li className="mb-3">
                       <div className="py-2 flex flex-row items-center justify-between">
                         <span>Children</span>
                         <div className="flex flex-row items-center space-x-3">
@@ -386,10 +432,10 @@ const HomePage = () => {
                           </button>
                         </div>
                       </div>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
-                <div className="lg:block hidden h-8 w-[1px] bg-gray-300"></div>
+
                 <button className="text-center bg-slate-700 px-4 sm:py-3 py-[0.4rem] outline-none text-white text-sm font-medium rounded-lg cursor-pointer">
                   Search
                 </button>
@@ -623,7 +669,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="px-3 mt-2">
-                  <h1 className="text-xs text-slate-800 font-semibold capitalize">
+                  <h1 className="lg:text-xs text-sm text-slate-800 font-semibold capitalize">
                     7Seasons Apartment
                   </h1>
 
@@ -639,7 +685,7 @@ const HomePage = () => {
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span className="text-[0.56em] text-gray-400 capitalize">
+                    <span className="lg:text-[0.56em] text-xs text-gray-400 capitalize">
                       Kensington / London
                     </span>
                   </div>
@@ -681,7 +727,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="px-3 mt-2">
-                  <h1 className="text-xs text-slate-800 font-semibold capitalize">
+                  <h1 className="lg:text-xs text-sm text-slate-800 font-semibold capitalize">
                     Along With The Villa
                   </h1>
 
@@ -697,7 +743,7 @@ const HomePage = () => {
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span className="text-[0.56em] text-gray-400 capitalize">
+                    <span className="lg:text-[0.56em] text-xs text-gray-400 capitalize">
                       Hungary / Budapest
                     </span>
                   </div>
@@ -739,7 +785,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="px-3 mt-2">
-                  <h1 className="text-xs text-slate-800 font-semibold capitalize">
+                  <h1 className="lg:text-xs text-sm text-slate-800 font-semibold capitalize">
                     Resorts and Recreation
                   </h1>
 
@@ -755,7 +801,7 @@ const HomePage = () => {
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span className="text-[0.56em] text-gray-400 capitalize">
+                    <span className="lg:text-[0.56em] text-xs text-gray-400 capitalize">
                       Williamstreet / Boxon
                     </span>
                   </div>
@@ -797,7 +843,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="px-3 mt-2">
-                  <h1 className="text-xs text-slate-800 font-semibold capitalize">
+                  <h1 className="lg:text-xs text-sm text-slate-800 font-semibold capitalize">
                     Beautiful and Classy
                   </h1>
 
@@ -813,7 +859,7 @@ const HomePage = () => {
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span className="text-[0.56em] text-gray-400 capitalize">
+                    <span className="lg:text-[0.56em] text-xs text-gray-400 capitalize">
                       Citadines Opera Paris / France
                     </span>
                   </div>
@@ -855,7 +901,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="px-3 mt-2">
-                  <h1 className="text-xs text-slate-800 font-semibold capitalize">
+                  <h1 className="lg:text-xs text-sm text-slate-800 font-semibold capitalize">
                     Permanent Peace
                   </h1>
 
@@ -871,7 +917,7 @@ const HomePage = () => {
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span className="text-[0.56em] text-gray-400 capitalize">
+                    <span className="lg:text-[0.56em] text-xs text-gray-400 capitalize">
                       Sugar Apartment / Brazil
                     </span>
                   </div>
