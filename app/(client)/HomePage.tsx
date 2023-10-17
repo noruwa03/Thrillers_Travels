@@ -540,7 +540,7 @@ const HomePage = () => {
                   unoptimized={true}
                   width={50}
                   height={50}
-                  className="lg:w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
+                  className="w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
                 />
                 <div>
                   <div className="flex flex-row items-center justify-between">
@@ -992,7 +992,7 @@ const HomePage = () => {
                   unoptimized={true}
                   width={50}
                   height={50}
-                  className="snap-center lg:w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
+                  className="w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
                 />
                 <div>
                   <div className="flex flex-row items-center justify-between">
@@ -1028,7 +1028,7 @@ const HomePage = () => {
                   unoptimized={true}
                   width={50}
                   height={50}
-                  className="snap-center lg:w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
+                  className="w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
                 />
                 <div>
                   <div className="flex flex-row items-center justify-between">
@@ -1064,7 +1064,7 @@ const HomePage = () => {
                   unoptimized={true}
                   width={50}
                   height={50}
-                  className="snap-center lg:w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
+                  className="w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
                 />
                 <div>
                   <div className="flex flex-row items-center justify-between">
@@ -1100,7 +1100,7 @@ const HomePage = () => {
                   unoptimized={true}
                   width={50}
                   height={50}
-                  className="snap-center lg:w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
+                  className="w-[4.7rem] aspect-[4/4] cursor-pointer object-cover rounded-2xl"
                 />
                 <div>
                   <div className="flex flex-row items-center justify-between">
